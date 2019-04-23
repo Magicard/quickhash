@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1671.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; color: #191919; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; -webkit-text-stroke: #000000; min-height: 19.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">import hashlib</span></p>
+<p class="p1"><span class="s1">""""This code allows you to create a file in which to store a username and hashed password."""</span></p>
+<p class="p1"><span class="s1">def hash_pass(input_pass):</span></p>
+<p class="p1"><span class="s1">    salt= user_name # the salt is the username in case two users have the same password, the hash is still different</span></p>
+<p class="p1"><span class="s1">    hashed= hashlib.md5(salt.encode())</span></p>
+<p class="p1"><span class="s1">    hashed.update(input_pass.encode())</span></p>
+<p class="p1"><span class="s1">    new_pass= hashed.digest()</span></p>
+<p class="p1"><span class="s1">    return new_pass</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">password_file= input('Enter the filename where the credentials are stored.')</span></p>
+<p class="p1"><span class="s1">user_name = input("Enter the user's account name.")</span></p>
+<p class="p1"><span class="s1">credentials = {}</span></p>
+<p class="p1"><span class="s1">password = input('Password: ')</span></p>
+<p class="p1"><span class="s1">password1 = input('Please Re-Type The Password: ')</span></p>
+<p class="p1"><span class="s1">count= 0</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">while password!=password1 and count==0:</span></p>
+<p class="p1"><span class="s1">    print('Password Mismatch! Please Re-Type the password: ')</span></p>
+<p class="p1"><span class="s1">    password1= input()</span></p>
+<p class="p1"><span class="s1">    count= 1</span></p>
+<p class="p1"><span class="s1">    if password!= password1:</span></p>
+<p class="p1"><span class="s1">        count= 0</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">str_pass= str(hash_pass(password)) # converting the hash to a string</span></p>
+<p class="p1"><span class="s1">try:</span></p>
+<p class="p1"><span class="s1">     with open(password_file, 'a') as f:</span></p>
+<p class="p1"><span class="s1">        f.write('Username: {}\n'.format(user_name))</span></p>
+<p class="p1"><span class="s1">        f.write("Password: ")</span></p>
+<p class="p1"><span class="s1">        f.write(str_pass)</span></p>
+<p class="p1"><span class="s1">except OSError as e:</span></p>
+<p class="p1"><span class="s1">    pass</span></p>
+</body>
+</html>
